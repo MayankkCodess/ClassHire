@@ -39,7 +39,7 @@ export const register = async(req,res) =>{
 
 export const login = async (req,res) =>{
     try{
-        console.log("Body request:",req.body);
+        // console.log("Body request:",req.body);
         const{email,password,role} = req.body;
         if( !email || !password || !role){
             return res.status(400).json({
