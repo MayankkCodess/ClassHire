@@ -66,10 +66,10 @@ const {user} = useSelector(store=>store.auth);
           {isResume ? (
             <a
               target="blank"
-              href="https://youtube.com/"
+              href={user?.profile?.resume}
               className="text-blue-500 w-full hover:underline cursor-pointer"
             >
-              Youtube
+              {user?.profile?.resumeOriginalName}
             </a>
           ) : (
             <span>Not Applicable</span>

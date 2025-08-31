@@ -20,7 +20,9 @@ const [input,setInput] = useState({
     phoneNumber:user?.phoneNumber,
     bio:user?.profile?.bio,
     skills:user?.profile?.skills?.map(skill=>skill),
-    file:user?.profile?.resume
+    // file:user?.profile?.resume
+    file:null, // 👈 only for new uploads
+    resume:user?.profile?.resume // 👈 keep URL separately
 });
 const dispatch = useDispatch();
 const changeEventHandler= (e) =>{
@@ -42,6 +44,7 @@ const submitHandler = async (e) =>{
         formData.append("file",input.file)
     }
     try {
+        setLoading(true);
         const res = await axios.post(`${USER_API_END_POINT}/profile/update`,formData,{
            headers:{
             'Content-Type':'multipart/form-data'
@@ -55,6 +58,8 @@ const submitHandler = async (e) =>{
     } catch (error) {
         console.log(error);
         toast.error(error.response.data.message);
+    }finally{
+        setLoading(false);
     }
     setOpen(false);
     console.log(input);
