@@ -5,7 +5,7 @@ import getDataUri from "../utils/datauri.js";
 import cloudinary from "../utils/cloudinary.js";
 export const register = async(req,res) =>{
     try{
-        console.log("BODY RECEIVED:", req.body);
+        // console.log("BODY RECEIVED:", req.body);
         const {fullname,email,phoneNumber,password,role} = req.body;
         if(!fullname || !email || !phoneNumber || !password || !role){
             return res.status(400).json({
@@ -92,8 +92,8 @@ export const login = async (req,res) =>{
             role:user.role,
             profile:user.profile
         }
-
-        return res.status(200).cookie("token",token,{maxAge:1*24*60*60*1000 ,httpsOnly:true ,sameSite:"Strict"}).json({
+        //why httpOnly why not httpsOnly
+        return res.status(200).cookie("token",token,{maxAge:1*24*60*60*1000 ,httpOnly:true ,sameSite:"Strict"}).json({
             message:`Welcome back ${user.fullname}`,
             user,
             success:true
