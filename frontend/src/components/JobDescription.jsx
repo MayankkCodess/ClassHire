@@ -1,24 +1,43 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "./ui/button.jsx";
 import { Badge } from "./ui/badge.jsx";
 import Navbar from "./shared/Navbar.jsx";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import { JOB_API_END_POINT } from "../utils/constant.js";
+import { APPLICATION_API_END_POINT, JOB_API_END_POINT } from "../utils/constant.js";
 import { setSingleJob } from "../redux/jobSlice.js";
 import { useDispatch, useSelector } from "react-redux";
+import { toast } from "sonner";
 <Navbar />;
 const JobDescription = () => {
-  const params = useParams();
-  const jobId = params.id;
   const { singleJob } = useSelector((store) => store.job);
   const { user } = useSelector((store) => store.auth);
-  const dispatch = useDispatch();
   //This logic below
-  const isApplied =
+  const isInitiallyApplied =
     singleJob?.applications?.some(
       (applications) => applications.applicant === user?._id
     ) || false;
+
+   const [isApplied,setIsApplied] = useState(isInitiallyApplied);
+
+  const params = useParams();
+  const jobId = params.id;
+  const dispatch = useDispatch();
+  
+  const applyJobHandler  = async() =>{
+    try{
+      const res = await axios.get(`${APPLICATION_API_END_POINT}/apply/${jobId}`,{withCredentials:true});
+      if(res.data.success){
+        setIsApplied(true);//update button when applied 
+        const updatedSingleJob = {...singleJob,applications:[...singleJob.applications,{applicant:user?._id}]}
+        dispatch(setSingleJob(updatedSingleJob));
+        toast.success(res.data.message);
+      }
+    }catch(error){
+        console.log(error);
+        toast.error(error?.response?.data?.message);
+    }
+  }
 
   useEffect(() => {
     const fetchSingleJob = async () => {
@@ -29,6 +48,7 @@ const JobDescription = () => {
         // console.log(res)
         if (res.data.success) {
           dispatch(setSingleJob(res.data.job));
+          setIsApplied(res.data.job.applications.some(application=>application.applicant ===user?._id))
         }
       } catch (error) {
         console.log(error);
@@ -57,6 +77,7 @@ const JobDescription = () => {
             </div>
           </div>
           <Button
+            onClick={isApplied ? null : applyJobHandler}
             disabled={isApplied}
             className={`rounded=lg ${
               isApplied

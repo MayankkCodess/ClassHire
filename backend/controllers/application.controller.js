@@ -20,7 +20,7 @@ export const applyJob = async(req,res) =>{
             })
         }
 
-        // check if the jobs exists
+        // check if the jobs exists or not
         const job = await Job.findById(jobId);
         if(!job){
             return res.status(404).json({
