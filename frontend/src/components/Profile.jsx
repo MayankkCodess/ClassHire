@@ -9,13 +9,15 @@ import AppliedJobTable from "./AppliedJobTable.jsx";
 import { useState } from "react";
 import UpdateProfileDialog from "./UpdateProfileDialog.jsx";
 import { useSelector } from "react-redux";
+import useGetAppliedJobs from "@/hooks/useGetAppliedJobs.jsx";
 
 // const skills = ["HTML", "CSS", "JavaScript", "Reactjs"];
-  const isResume = true;
+const isResume = true;
 
 const Profile = () => {
-const [open,setOpen] = useState(false);
-const {user} = useSelector(store=>store.auth);
+  useGetAppliedJobs();
+  const [open, setOpen] = useState(false);
+  const { user } = useSelector((store) => store.auth);
   return (
     <div>
       <Navbar />
@@ -33,7 +35,7 @@ const {user} = useSelector(store=>store.auth);
               <p>{user?.profile?.bio}</p>
             </div>
           </div>
-          <Button onClick={()=>setOpen(true)}>
+          <Button onClick={() => setOpen(true)}>
             <Pen />
           </Button>
         </div>
@@ -78,10 +80,10 @@ const {user} = useSelector(store=>store.auth);
         <div className="max-w-4xl mx-auto bg-white rounded-2xl">
           <h1 className="font-bold text-lg my-5">Applied Jobs</h1>
           {/* Application Table */}
-          <AppliedJobTable/>
+          <AppliedJobTable />
         </div>
       </div>
-      <UpdateProfileDialog open={open} setOpen={setOpen}/>
+      <UpdateProfileDialog open={open} setOpen={setOpen} />
     </div>
   );
 };

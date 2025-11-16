@@ -3,6 +3,7 @@ import bcrypt from 'bcryptjs'
 import jwt from "jsonwebtoken"
 import getDataUri from "../utils/datauri.js";
 import cloudinary from "../utils/cloudinary.js";
+
 export const register = async(req,res) =>{
     try{
         // console.log("BODY RECEIVED:", req.body);

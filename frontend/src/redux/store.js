@@ -2,9 +2,10 @@ import {configureStore,combineReducers} from '@reduxjs/toolkit';
 import authSlice from "./authSlice.js"
 import jobSlice from "./jobSlice.js"
 import companySlice from "./companySlice.js"
+import applicationSlice from "./applicationSlice.js";
 
 //this file includes redux-persist as well with redux setup 
-
+//redux-persist is used for saving the states like login,etc.
 import {
   persistReducer,
   FLUSH,
@@ -19,7 +20,8 @@ import storage from 'redux-persist/lib/storage'
 const rootReducer = combineReducers({
   auth:authSlice,
   job:jobSlice,
-  company:companySlice
+  company:companySlice,
+  application:applicationSlice
 })
 
 
