@@ -9,10 +9,19 @@ import {
   JOB_API_END_POINT,
 } from "../utils/constant.js";
 import { setSingleJob } from "../redux/jobSlice.js";
+//useSelector:- this hook allow you to extract data or the state from the redux from the redux store using selector function(returns the data)
+//so jo bhi data tumhe store se chahiye ye return krdeta hai, for that you have already used provider in main.jsx
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "sonner";
+
+//(useDispatch) Problem statement :- l we want like , we have added a task and now we want that to go in store.js(imp) and store in that particular slice
+// for soln of above pbm - we need to create a action (add task) and then it will go to reducer function and it will add that new task , so we call it dispatching an action 
+//useDispatch :- the useDispatch hook allow you to send or dispatch an action to the redux store by giving the action as an argument to the dispatch variable.
+// we store useDispatch() fun in a variable named dispatch and then pass an action object in that dispatch variable.
+
 <Navbar />;
 const JobDescription = () => {
+  // below we are returning job(jobSlice) from store , because we have access to store due to useselector
   const { singleJob } = useSelector((store) => store.job);
   const { user } = useSelector((store) => store.auth);
   //This logic below
@@ -39,6 +48,7 @@ const JobDescription = () => {
           ...singleJob,
           applications: [...singleJob.applications, { applicant: user?._id }],
         };
+        // before dispatching :- clear about 1. konsa reducer fn call hoga ,2. konse action pr woh reducer fn call hoga 
         dispatch(setSingleJob(updatedSingleJob));
         toast.success(res.data.message);
       }
