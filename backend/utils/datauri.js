@@ -8,7 +8,7 @@ const getDataUri = (file) => {
     const extName = path.extname(file.originalname).toString();
     return parser.format(extName, file.buffer);
   } catch (err) {
-    console.error('[getDataUri Error]:', error.message);
+    console.error('[getDataUri Error]:', err.message);// change here 
     res.status(500).json({ message: 'Internal Server Error' });
   }
 };

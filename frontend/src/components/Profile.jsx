@@ -13,7 +13,7 @@ import useGetAppliedJobs from "@/hooks/useGetAppliedJobs.jsx";
 
 // const skills = ["HTML", "CSS", "JavaScript", "Reactjs"];
 const isResume = true;
-
+        
 const Profile = () => {
   useGetAppliedJobs();
   const [open, setOpen] = useState(false);

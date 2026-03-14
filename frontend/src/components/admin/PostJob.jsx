@@ -34,7 +34,12 @@ const PostJob = () => {
     };
 
     const selectChangeHandler = (value) => {
-        const selectedCompany = companies.find((company)=> company.name.toLowerCase() === value);
+        const selectedCompany = companies?.find((company)=> company.name.toLowerCase() === value);
+
+  console.log("Selected object:", selectedCompany);
+  console.log("Selected ID:", selectedCompany?._id);
+
+
         setInput({...input, companyId:selectedCompany._id});
     };
 
@@ -145,33 +150,32 @@ const PostJob = () => {
                                 className="focus-visible:ring-offset-0 focus-visible:ring-0 my-1"
                             />
                         </div>
-                        {
-                            companies.length > 0 && (
+                              {
+                            companies?.length !== 0 && (
                                 <Select onValueChange={selectChangeHandler}>
-                                    <SelectTrigger className="w-[180px]">
+                                    <SelectTrigger className="w-[180px] mb-4">
                                         <SelectValue placeholder="Select a Company" />
                                     </SelectTrigger>
-                                    <SelectContent>
+                                    <SelectContent className="z-50">
                                         <SelectGroup>
                                             {
-                                                companies.map((company) => {
+                                              companies &&  companies?.map((company) => {
                                                     return (
-                                                        <SelectItem value={company?.name?.toLowerCase()}>{company.name}</SelectItem>
+                                                        <SelectItem key={company?._id} value={company?.name?.toLowerCase()}>{company?.name}</SelectItem>
                                                     )
                                                 })
                                             }
-
                                         </SelectGroup>
                                     </SelectContent>
                                 </Select>
                             )
-                        }
+                        }                    
                     </div> 
                     {
                         loading ? <Button className="w-full my-4"> <Loader2 className='mr-2 h-4 w-4 animate-spin' /> Please wait </Button> : <Button type="submit" className="w-full my-4">Post New Job</Button>
                     }
                     {
-                        companies.length === 0 && <p className='text-xs text-red-600 font-bold text-center my-3'>*Please register a company first, before posting a jobs</p>
+                        companies?.length === 0 && <p className='text-xs text-red-600 font-bold text-center my-3'>*Please register a company first, before posting a jobs</p>
                     }
                 </form>
             </div>

@@ -5,7 +5,7 @@ export const postJob = async(req,res)=>{
     try {
         const{title,description,salary,requirements,location,experience,jobType,position,companyId} = req.body;
         const userId = req.id;
-
+        console.log(req.body)
         if(!title || !description || !salary || !requirements || !experience || !location || !jobType || !position || !companyId){
             return res.status(400).json({
                 message:"Something is missing.",
@@ -31,6 +31,7 @@ export const postJob = async(req,res)=>{
         })
     } catch (error) {
         console.log(error);
+        return res.status(400).json({ message: "Failed to creating a new job." })
     }
 }
   // Students k Liye
@@ -58,6 +59,7 @@ export const getAllJobs = async (req,res) =>{
         })
     } catch (error) {
         console.log(error);
+         return res.status(400).json({ message: "Failed to get jobs" });
     }
 }
 
@@ -80,6 +82,7 @@ export const getJobById = async(req,res)=>{
         });
     }catch(error){
         console.log(error);
+        return res.status(400).json({message:"Failed to get job"});
     }
 }
 
@@ -104,5 +107,6 @@ export const getAdminJobs = async(req,res) =>{
        })
     }catch(error){
         console.log(error);
+        return res.status(400).json({ message: error });
     }
 }

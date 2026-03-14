@@ -121,12 +121,17 @@ export const updateProfile = async (req,res) => {
         //cloudinary ayega idhar
         const file = req.file;
         const fileUri = getDataUri(file);
-        const cloudResponse = await cloudinary.uploader.upload(fileUri.content,{resource_type:"raw" , format:"pdf"})
-        let skillsArray;
-        if(skills){
-            skillsArray = skills.split(",");
+        const cloudResponse = await cloudinary.uploader.upload(fileUri.content, {
+        resource_type: "auto",
+         type: "upload"  
+      });
+
+         if (!fullname || !email || !phoneNumber || !bio || !skills) {
+            return res.status(400).json({ message: "All fields are required", success: false });
         }
+         const skillsArray = skills.split(",");
         const userId = req.id; // middleware authentication 
+
         let user = await User.findById(userId);
 
         if(!user) {
@@ -166,5 +171,6 @@ export const updateProfile = async (req,res) => {
         })
     }catch(error){
         console.log(error);
+          return res.status(500).json({ message: "Server error", success: false });
     }
 }

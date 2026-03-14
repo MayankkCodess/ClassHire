@@ -29,6 +29,7 @@ export const registerCompany = async (req, res) => {
     });
   } catch (error) {
     console.log(error);
+     return res.status(400).json({ error })
   }
 };
 
@@ -79,7 +80,7 @@ export const updateCompany = async (req, res) => {
     const cloudResponse = await cloudinary.uploader.upload(fileUri.content);
     const logo = cloudResponse.secure_url;
 
-    const updateData = { name, description, website, location };
+    const updateData = { name, description, website, location ,logo};
     const company = await Company.findByIdAndUpdate(req.params.id, updateData, {
       new: true,
     });
@@ -96,5 +97,9 @@ export const updateCompany = async (req, res) => {
     });
   } catch (error) {
     console.log(error);
+     return res.status(500).json({
+            message: "An error occurred while updating company information.",
+            success: false
+        });
   }
 };
