@@ -1,10 +1,15 @@
-import { setSingleCompany } from '@/redux/companySlice'
+import { setSingleCompany } from '@/redux/companySlice.js'
 //Search the Reason about why he written below line 
 // import { setAllJobs } from '@/redux/jobSlice'  
-import { COMPANY_API_END_POINT, JOB_API_END_POINT } from '@/utils/constant'
+import { COMPANY_API_END_POINT, JOB_API_END_POINT } from '@/utils/constant.js'
 import axios from 'axios'
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
+
+// Most Important hook to understand in comparing from all hooks 
+//Backend :- company.route.js , company.model.js , company.controller.js(getCompanyById) , check db also 
+//Frontend :- main file - CompanySetup.jsx , other also needs to check - CompanyCreate.jsx
+// Redux :- companySlice(setSingleCompany) , store 
 
 const useGetCompanyById = (companyId) => {
     const dispatch = useDispatch();

@@ -13,6 +13,8 @@ const AdminJobs = () => {
   const [input, setInput] = useState("");
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  
+  //check full working of this code how does useEffect works with two combinings like adminJobstable
 
   useEffect(() => {
     dispatch(setSearchJobByText(input));

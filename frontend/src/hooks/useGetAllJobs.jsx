@@ -4,6 +4,12 @@ import { JOB_API_END_POINT } from '../utils/constant';
 import axios from 'axios';
 import { setAllJobs } from '../redux/jobSlice';
 
+//Important Point Notices - check why we use this useGetAllJobs.jsx in Home.jsx & Browse.jsx only why not in LatestJobs.jsx , LatestJobCards.jsx ,Jobs.jsx , Job.jsx
+
+//Backend :- job.route.js , job.controller.js(getAllJobs) , .populate , req.query , check in db 
+//Frontend :- Home.jsx , check in LatestJobs.jsx , LatestJobCards.jsx , props(React) , .map(js) , check - Jobs.jsx also ,then Job.jsx also 
+//redux :- jobSlice.js(allJobs , setAllJobs ) , and store in redux 
+
 const useGetAllJobs = () => {
     const dispatch = useDispatch();
     useEffect(() =>{
@@ -21,4 +27,4 @@ const useGetAllJobs = () => {
     },[]);
 }
 
-export default useGetAllJobs
+export default useGetAllJobs;

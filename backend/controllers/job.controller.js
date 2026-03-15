@@ -34,7 +34,7 @@ export const postJob = async(req,res)=>{
         return res.status(400).json({ message: "Failed to creating a new job." })
     }
 }
-  // Students k Liye
+  // Students k Liye ,, check this full fn clearly 
 export const getAllJobs = async (req,res) =>{
     try {
         const keyword = req.query.keyword || "";

@@ -4,12 +4,16 @@ import axios from 'axios'
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 
+//Backend :- Routes - job.route.js , controller :- job.controller.js(getAdminJobs) 
+//Frontend :- components/admin - AdminJobs.jsx,AdminJobsTable.jsx  , redux - store.js , jobSlice.js
+
 const useGetAllAdminJobs = () => {
     const dispatch = useDispatch();
     useEffect(()=>{
         const fetchAllAdminJobs = async () => {
             try {
                 const res = await axios.get(`${JOB_API_END_POINT}/getadminjobs`,{withCredentials:true});
+                //below - .success & .jobs & even error is coming from backend (verify by console.log())
                 if(res.data.success){
                     dispatch(setAllAdminJobs(res.data.jobs));
                 }

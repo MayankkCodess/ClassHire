@@ -24,7 +24,7 @@ const Applicants = () => {
                 }
             } catch (error) {
                 console.log(error);
-                toast.error(error.response.data.message);
+                toast.error(error.response.data.message);  // check it completely by debugging 
             }
         }
         fetchAllApplicants();
@@ -33,7 +33,7 @@ const Applicants = () => {
         <div>
             <Navbar />
             <div className='max-w-7xl mx-auto'>
-                <h1 className='font-bold text-xl my-5'>Applicants ({applicants?.applications.length}</h1>
+                <h1 className='font-bold text-xl my-5'>Applicants ({applicants?.applications.length}</h1> 
                 <ApplicantsTable />
             </div>
         </div>
