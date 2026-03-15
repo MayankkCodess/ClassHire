@@ -1,12 +1,24 @@
-{
-  "files": [],
-  "references": [
+// {
+//   "files": [],
+//   "references": [
     
-  ],
+//   ],
+//   "compilerOptions": {
+//     "baseUrl": ".",
+//     "paths": {
+//       "@/*": ["./src/*"]
+//     }
+//   }
+// }
+
+
+
+{
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"]
-    }
+    },
+    "ignoreDeprecations": "6.0"
   }
 }
