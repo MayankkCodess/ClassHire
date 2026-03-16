@@ -1,3 +1,4 @@
+//We have imported createBrowserRouter & RouteProvider from reactRouterDom 
 import {createBrowserRouter,RouterProvider} from "react-router-dom"
 import Navbar from './components/shared/Navbar.jsx'
 import Home from './components/Home.jsx'
@@ -15,6 +16,7 @@ import PostJob from './components/admin/PostJob.jsx'
 import Applicants from './components/admin/Applicants.jsx'
 import ProtectedRoute from './components/admin/ProtectedRoute.jsx'
 
+// this createBrowserRouter Takes arrays & Learn about a concept of {Outlet} in reactrouterDom also it helps 
 const appRouter = createBrowserRouter([
   {
     path:'/',
@@ -75,6 +77,10 @@ const appRouter = createBrowserRouter([
 function App() {    
   return (
     <>
+    {
+      // this RouterProvider Component has one condn , ki ye prop leta hai aur bina uske kaam nahi karta 
+      // aur woh prop hai knha , iss prop ko chahiye router aur uske liye ek aur import kro createBrowserRouter .. 
+    }
       <RouterProvider router = {appRouter}/>
     </>
   )
