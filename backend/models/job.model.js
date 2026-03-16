@@ -32,6 +32,7 @@ const jobSchema = new mongoose.Schema({
         type:Number,
         required:true
     },
+   //  company id refers to Company collection
     company:{
         type:mongoose.Schema.Types.ObjectId,
         ref:'Company',

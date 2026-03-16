@@ -88,9 +88,12 @@ export const getJobById = async(req,res)=>{
 
 //how much jobs admin had created till now 
 
+//.populate() in mongoose , see full process below this controller
+
 export const getAdminJobs = async(req,res) =>{
     try{
        const adminId = req.id;
+       //yaha pr hoga kya ki mongoose , company ki objectId lega job se , aur then query krega company collection ko , aur replace krdega objectId with full company documents 
        const jobs = await Job.find({created_by:adminId}).populate({
             path:'company',
             createdAt:-1
@@ -110,3 +113,40 @@ export const getAdminJobs = async(req,res) =>{
         return res.status(400).json({ message: error });
     }
 }
+
+// .populate() below 
+// What MongoDB Does Internally for populate learn using above controller
+
+//   Step 1 — Query jobs :- SELECT * FROM jobs WHERE created_by = adminId
+
+// Result: [
+//         {title:"Backend Dev", company:"101"},
+//         {title:"Frontend Dev", company:"102"}
+//         ]
+
+//   Step 2 — populate triggers second query :- SELECT * FROM companies WHERE _id IN [101,102]
+
+//   Step 3 — Mongoose merges result
+
+//   Final response:
+
+                    // [
+                    // {
+                    // title:"Backend Dev",
+                    // company:{
+                    //     _id:"101",
+                    //     name:"Google",
+                    //     location:"Bangalore"
+                    // }
+                    // },
+                    // {
+                    // title:"Frontend Dev",
+                    // company:{
+                    //     _id:"102",
+                    //     name:"Amazon",
+                    //     location:"Hyderabad"
+                    // }
+                    // }
+                    // ]
+
+//  VVV IMP Line :- So populate basically performs a JOIN like SQL.
