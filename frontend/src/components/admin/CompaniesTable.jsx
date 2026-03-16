@@ -7,15 +7,12 @@ import {
   TableHeader,
   TableBody,
   TableCell,
-} from "../ui/table";
+} from "../ui/table.jsx";
 import { Edit2, MoreHorizontal } from "lucide-react";
-import { Avatar, AvatarImage } from "../ui/avatar.jsx";
-// import {Popover, PopoverContent} from "../ui/popover.jsx"
 import { useSelector } from "react-redux";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover.jsx";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-// import { PopoverTrigger } from "@radix-ui/react-popover";
 
 const CompaniesTable = () => {
   const { companies, searchCompanyByText } = useSelector(
@@ -26,6 +23,8 @@ const CompaniesTable = () => {
 
   useEffect(() => {
     const filteredCompany =
+    //In JavaScript, && does not return true/false always , here It returns one of the operands. means if companies exists only then it will run .filter(); 
+    //Meaning: If A is falsy → return A , If A is truthy → return B , So && acts like a guard operator.
       companies &&
       companies.filter((company) => {
         if (!searchCompanyByText) return true;
@@ -39,7 +38,7 @@ const CompaniesTable = () => {
   return (
     <div>
       <Table>
-        <TableCaption>A List of your Recent Registered</TableCaption>
+        <TableCaption>A List of your Recently Registered Companies</TableCaption>
         <TableHeader>
           <TableRow>
             <TableHead>Logo</TableHead>
@@ -55,15 +54,18 @@ const CompaniesTable = () => {
             animate={{ x: 0 }}
             exit={{ x: -100 }}
             transition={{ duration: 0.5 }}
+            // React requires a unique key when rendering lists , Because React needs to know: "Which item changed, which item stayed same, which item got deleted."
             key={company._id}>
             <TableCell className="w-fit">
-             <div className="h-10 w-10 flex items-center justify-center border rounded-md bg-white">
-    <img 
-      src={company?.logo} 
-      alt={company?.name} 
-      className="max-h-8 max-w-[36px] object-contain"
-    />
-  </div>
+             {/* <div className="h-10 w-10 flex items-center justify-center border rounded-md bg-white"> */}
+             <div className="h-12 w-16 flex items-center justify-center border rounded-md bg-white overflow-hidden p-1">
+              <img 
+                src={company?.logo} 
+                alt={company?.name} 
+                // className="max-h-8 max-w-[36px] object-contain"
+                className="h-full w-full object-contain"
+              />
+            </div>
             </TableCell>
             <TableCell>{company?.name}</TableCell>
             <TableCell>{company?.createdAt.split("T")[0]}</TableCell>

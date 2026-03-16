@@ -23,7 +23,7 @@ const AdminJobsTable = () => {
 // problem faced here (picture mai entry hoti hai map,filter ki):- agar hame kuch return karana hai condition lagake array pr , toh haam toh kra hi nahi sakte 
 
     useEffect(()=>{ 
-        console.log('called');
+        // console.log('called');
         // Filter :- array mai haam .filter() kr sakte hain ye bhi callback leta hai - usse aap two ways mai likh sakte hain - ()=> () , ()=>{} , nahi toh simple bina return keyword wala
         // const newNums = myNums.filter((num)=>num > 4) //hame condition deni hoti hai job bhi item/element us cond. ko satisfy krta hai , usse .filter hame values return krke bhi deta hai , like isme [5,6,7,8,9.10]
         const filteredJobs = allAdminJobs.filter((job)=>{
@@ -62,7 +62,8 @@ const AdminJobsTable = () => {
                     }
                     { //check useState() working below 
                         filterJobs?.map((job) => (
-                            <tr>
+                            //without key , this error is showing in console :- Warning: Each child in a list should have a unique "key" prop.
+                            <tr key={job._id}>
                                 <TableCell>{job?.company?.name}</TableCell>
                                 <TableCell>{job?.title}</TableCell>
                                 <TableCell>{job?.createdAt.split("T")[0]}</TableCell> {/*"2026-03-16T10:45:23.456Z".split("T") -> result : ["2026-03-16", "10:45:23.456Z"] ->  Now we take the first element of the array -> ["2026-03-16", "10:45:23.456Z"][0]  */}
@@ -84,7 +85,6 @@ const AdminJobsTable = () => {
                                     </Popover>
                                 </TableCell>
                             </tr>
-
                         ))
                     }
                 </TableBody>

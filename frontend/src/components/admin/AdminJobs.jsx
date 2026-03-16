@@ -28,7 +28,7 @@ const AdminJobs = () => {
   //below this useeffect helps in update store data in redux of SearchJobByText which is used by AdminJobsTable.jsx to reads Redux data.
   useEffect(() => {
     dispatch(setSearchJobByText(input));
-  }, [input]);
+  }, [input]);//chech problem in this dependency
 
   return (
     <div>

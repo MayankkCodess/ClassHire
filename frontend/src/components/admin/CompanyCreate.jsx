@@ -1,14 +1,16 @@
 import React, { useState } from "react";
 import Navbar from "../shared/Navbar.jsx";
-import { Label } from "@radix-ui/react-label";
+// import { Label } from "@radix-ui/react-label";
+import { Label } from '../ui/label.jsx'
 import { Input } from "../ui/input.jsx";
 import { Button } from "../ui/button.jsx";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { COMPANY_API_END_POINT } from "../../utils/constant.js";
-import { toast } from "sonner";
+import { toast } from "sonner";//check the correctness of this line 
 import { useDispatch } from "react-redux";
-import { setSingleCompany } from "../../redux/companySlice.js";
+//below :- check useGetCompanyById.jsx , companySlice.js & store 
+import { setSingleCompany } from "../../redux/companySlice.js"; 
 
 const CompanyCreate = () => {
     const navigate = useNavigate();
@@ -23,6 +25,7 @@ const CompanyCreate = () => {
                 },
                 withCredentials:true
             });
+            // why optional chaining motive here ??? 
             if(res?.data?.success){
                 dispatch(setSingleCompany(res.data.company));
                 toast.success(res.data.message);
