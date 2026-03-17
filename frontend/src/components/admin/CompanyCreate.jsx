@@ -21,6 +21,7 @@ const CompanyCreate = () => {
     // My peronal question why not useEffect Here ?? - (for answer - think it working & components life cycle )
     const registerCompany = async ()=>{
         try {
+          // Below this full components i have written full axios concept - axios.post(url , data , config)
             const res = await axios.post(`${COMPANY_API_END_POINT}/register`,{companyName},{
                 headers:{
                     "Content-Type":'application/json'
@@ -29,6 +30,8 @@ const CompanyCreate = () => {
             });
             // why optional chaining motive here ??? 
             if(res?.data?.success){
+              // dispatch is neccessary to remain in sync with redux 
+              // Create company → Navigate → New page loads → Fetch company again ❌ (extra API call) - if we don't use dispatch single company , then we may have to use another api call else where we are using that single company data to show on ui 
                 dispatch(setSingleCompany(res.data.company));
                 toast.success(res.data.message);
                 const companyId = res?.data?.company?._id;

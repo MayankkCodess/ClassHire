@@ -5,7 +5,7 @@ import { ArrowLeft, Loader2 } from "lucide-react";
 import { Label } from "../ui/label.jsx";
 import { Input } from "../ui/input.jsx";
 import axios from "axios";
-import { COMPANY_API_END_POINT } from "@/utils/constant";
+import { COMPANY_API_END_POINT } from "@/utils/constant.js";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "sonner";
 import { useSelector } from "react-redux";
@@ -158,3 +158,303 @@ const CompanySetup = () => {
 };
 
 export default CompanySetup;
+
+
+// --------------------------------------------------------React-Router-Dom---------------------------------------------------------
+/*
+
+
+1️⃣ First understand the problem React Router solves
+
+In normal websites (multi-page apps):
+                                    User clicks link
+                                    ↓
+                                    Browser requests new HTML page from server
+                                    ↓
+                                    Whole page reloads
+
+Example:
+
+/about
+/contact
+/login
+
+Each request loads a new HTML page. But React is a SPA (Single Page Application) React loads only one HTML file: index.html
+
+After that React controls navigation.
+
+So when user goes to:
+
+/login
+/signup
+/jobs
+
+The page does not reload. React simply switches components. This is what React Router does.
+
+2️⃣ What React Router actually is
+
+React Router is a library that allows: URL → Component mapping
+
+Example:
+/login  → Login component
+/signup → Signup component
+/jobs   → Jobs component
+
+3️⃣ Basic architecture of React Router
+
+You usually define routes in App.jsx.
+
+Example:
+
+import {BrowserRouter, Routes, Route} from "react-router-dom"
+import Signup from "./components/Signup"
+import Login from "./components/Login"
+
+function App() {
+  return (
+    <BrowserRouter>
+
+      <Routes>
+        <Route path="/signup" element={<Signup/>}/>
+        <Route path="/login" element={<Login/>}/>
+      </Routes>
+
+    </BrowserRouter>
+  )
+}
+
+Meaning:
+
+/signup → Signup component
+/login → Login component
+
+
+4️⃣ What BrowserRouter does
+
+<BrowserRouter>:- This enables client-side routing. It listens to URL changes using: HTML5 History API
+
+So when URL changes: React Router decides which component to render. Instead of refreshing the page.
+
+5️⃣ What Routes does
+<Routes>
+Routes acts like a switch statement.
+It checks URL and renders matching route.
+
+Example:
+
+URL = /login
+↓
+Routes finds matching path
+↓
+<Login/>
+
+6️⃣ What Route does
+                  <Route path="/login" element={<Login/>}/>
+
+Meaning:
+If URL = /login
+Render Login component
+
+Structure:
+Route
+ ├── path
+ └── element
+
+7️⃣ Navigation in React Router -  Declarative Navigation (Link , NavLink)
+
+Instead of using: <a href="/login">
+
+we use: <Link to="/login">
+
+Example from your code: <Link to="/login" className="text-blue-600">Login</Link>
+
+Why? Because <a> causes page reload.
+
+But <Link> does:
+                change URL
+                render component
+NO reload
+
+8️⃣ useNavigate (you used this) (Imperative Navigation)
+
+You wrote:
+const navigate = useNavigate();
+
+This is used for programmatic navigation.
+
+Example:
+navigate("/login")
+
+Meaning: Redirect user to login page
+
+In your code:
+
+if(res.data.success){
+   navigate("/login")
+}
+
+Flow:
+      Signup success
+      ↓
+      navigate("/login")
+      ↓
+      Login component renders
+
+🔟 Nested routing (important in big apps)
+
+Example:
+
+/admin
+/admin/jobs
+/admin/users
+
+Example:
+
+<Route path="/admin" element={<AdminLayout/>}>
+   <Route path="jobs" element={<AdminJobs/>}/>
+   <Route path="users" element={<AdminUsers/>}/>
+</Route>
+
+Meaning:
+      AdminLayout remains constant
+      Only inner components change
+       <Outlet />
+
+11️⃣ URL parameters
+Example: /job/123
+
+Route: <Route path="/job/:id" element={<JobDetails/>}/>
+
+Now we access id using: import {useParams} from "react-router-dom"
+
+const {id} = useParams()
+
+If URL: /job/123
+
+Then: id = 123
+
+12️⃣ Query parameters :- Example URL:
+
+/jobs?location=delhi
+
+Access using:
+
+import {useSearchParams} from "react-router-dom"
+
+const [searchParams] = useSearchParams()
+
+searchParams.get("location")
+
+Result: delhi
+
+
+13️⃣ Protected routes (very important)
+
+Example: /dashboard
+
+Should only work if user logged in.
+
+Example:
+      const ProtectedRoute = ({children}) => {
+        const {user} = useSelector(store=>store.auth)
+
+        if(!user){
+          return <Navigate to="/login"/>
+        }
+
+        return children
+      }
+
+Usage:
+      <Route
+      path="/dashboard"
+      element={
+        <ProtectedRoute>
+          <Dashboard/>
+        </ProtectedRoute>
+      }
+      />
+      
+14️⃣ Layout routes (used in large apps)
+
+Example:
+
+Navbar
+Sidebar
+Content
+
+Navbar should stay same across pages.
+
+Example:
+
+<Route element={<Layout/>}>
+   <Route path="/jobs" element={<Jobs/>}/>
+   <Route path="/companies" element={<Companies/>}/>
+</Route>
+
+15️⃣ Lazy loading routes (performance)
+
+Example:
+
+const Dashboard = React.lazy(()=>import("./Dashboard"))
+
+This loads component only when needed.
+
+
+
+# Core React Router DOM Concepts (Must Know)
+
+1️⃣ Routing Setup
+                BrowserRouter
+                Routes
+                Route
+
+Base of everything
+                      <BrowserRouter>
+                        <Routes>
+                          <Route path="/" element={<Home />} />
+                        </Routes>
+                      </BrowserRouter>
+
+
+2️⃣ Nested Routing (VERY IMPORTANT)
+
+Used in dashboards, admin panels :- 
+                                  <Route path="/admin" element={<AdminLayout />}>
+                                    <Route path="jobs" element={<Jobs />} />
+                                    <Route path="companies" element={<Companies />} />
+                                  </Route>
+Concepts:
+        Layout-based routing
+        <Outlet />
+
+
+3️⃣ Navigation
+
+Imperative Navigation (JS-based)
+useNavigate()
+            const navigate = useNavigate();
+            navigate("/admin/jobs");
+
+Declarative Navigation:-
+                      <Link>
+                      <NavLink>
+<Link to="/jobs">Jobs</Link>
+
+
+4️⃣ Dynamic Routes (used everywhere)
+
+<Route path="/companies/:id" element={<CompanyDetails />} />
+Hook:
+    useParams()
+const { id } = useParams();
+
+
+5️⃣ Route Protection (Auth / Role Based)
+
+Very important for real apps
+                            <Route path="/admin" element={<ProtectedRoute />}>
+
+Concepts:
+        Private routes
+        Role-based access (admin/user)     */
