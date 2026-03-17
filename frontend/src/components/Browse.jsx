@@ -5,10 +5,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setSearchedQuery } from '@/redux/jobSlice.js';
 import useGetAllJobs from '@/hooks/useGetAllJobs.jsx';
 
-// const randomJobs = [1, 2,45];
+// works to do here :- 1. Search bar Create krna hai 2. company logo actual aana chahiye 3. props check karo 
 
 const Browse = () => {
+    //Remember :- frontend ke pass iss custom hook ke last fetch tak ka hi deta hai ,if db mai se job delete ho jati hai , toh bina refresh kare naya data nahi milega ,kyunki jab refresh hoga tabhi useGetAllJob.jsx tumhe fresh data dega 
+   // What happens on refresh (important) - When you press: F5
+   //Entire app reloads: Component mounts again -> useEffect runs again ->API called again
+    // So YES: Custom hook runs again on refresh :- But reason is: Component remounts -> NOT because it's outside useEffect.
+
     useGetAllJobs();
+    // it is an array check in jobSlice 
     const {allJobs} = useSelector(store=>store.job);
     const dispatch = useDispatch();
     useEffect(()=>{

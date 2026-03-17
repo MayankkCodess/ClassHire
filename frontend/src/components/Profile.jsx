@@ -24,9 +24,9 @@ const Profile = () => {
       <div className="max-w-4xl mx-auto bg-white border border-gray-200 rounded-2xl my-5 p-8">
         <div className="flex justify-between">
           <div className="flex items-center gap-4">
-            <Avatar className="h-24 w-24">
+            <Avatar className="h-24 w-24 cursor-pointer">
               <AvatarImage
-                src="https://www.shutterstock.com/image-vector/circle-line-simple-design-logo-600nw-2174926871.jpg"
+                src={user?.profile?.profilePhoto}
                 alt=""
               />
             </Avatar>
@@ -39,7 +39,7 @@ const Profile = () => {
             <Pen />
           </Button>
         </div>
-        <div className="my-5">
+        <div className="my-5 mx-5">
           <div className="flex items-center gap-3 my-2">
             <Mail />
             <span>{user?.email}</span>
@@ -49,7 +49,7 @@ const Profile = () => {
             <span>{user?.phoneNumber}</span>
           </div>
         </div>
-        <div>
+        <div className="mx-5">
           <h1 className="font-semibold text-xl my-3">{user?.skills}</h1>
           <div className="flex items-center gap-2">
             {user?.profile?.skills.length != 0 ? (
@@ -63,7 +63,7 @@ const Profile = () => {
             )}
           </div>
         </div>
-        <div className="grid w-full max-w-sm items-center gap-1.5">
+        <div className="grid w-full max-w-sm items-center gap-1.5 mx-5">
           <Label className="text-md font-bold">Resume</Label>
           {isResume ? (
             <a

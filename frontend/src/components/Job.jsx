@@ -28,11 +28,19 @@ const Job = ({ job }) => {
       </div>
 
       <div className="flex items-center gap-2 my-2">
-        <Button className="p-6" variant="outline" size="icon">
+        {/* <Button className="p-6" variant="outline" size="icon">
           <Avatar>
             <AvatarImage src="https://www.shutterstock.com/image-vector/circle-line-simple-design-logo-600nw-2174926871.jpg"></AvatarImage>
           </Avatar>
-        </Button>
+        </Button> */}
+        <div className="h-12 w-16 flex items-center justify-center border rounded-md bg-white overflow-hidden p-1">
+              <img 
+                src={job?.company?.logo} 
+                alt={job?.company?.name} 
+                // className="max-h-8 max-w-[36px] object-contain"
+                className="h-full w-full object-contain"
+              />
+            </div>
         <div>
           <h1 className="font-medium text-lg">{job?.company?.name}</h1>
           <p className="text-sm text-gray-500">India</p>
@@ -43,13 +51,13 @@ const Job = ({ job }) => {
         <p className="text-sm text-gray-600">{job?.description}</p>
       </div>
       <div className="flex items-center gap-2 mt-4">
-        <Badge className={"text-blue-700 font-bold"} variant="secondary">
+        <Badge className={"text-[#384B70] font-bold"} variant="secondary">
           {job?.position}
         </Badge>
-        <Badge className={"text-[#F83802] font-bold"} variant="secondary">
+        <Badge className={"text-[#384B70] font-bold"} variant="secondary">
           {job?.jobType}
         </Badge>
-        <Badge className={"text-[#7209b7] font-bold"} variant="secondary">
+        <Badge className={"text-[#384B70] font-bold"} variant="secondary">
           {job?.salary}
         </Badge>
       </div>
@@ -60,7 +68,7 @@ const Job = ({ job }) => {
         >
           Details
         </Button>
-        <Button className="bg-[#7209b7]">Save For Later</Button>
+        <Button className="bg-[#384B70]">Save For Later</Button>
       </div>
     </div>
   );

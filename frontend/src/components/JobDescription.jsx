@@ -88,13 +88,13 @@ const JobDescription = () => {
           <div>
             <h1 className="font-bold text-xl">{singleJob?.title}</h1>
             <div className="flex items-center gap-2 mt-4">
-              <Badge className={"text-blue-700 font-bold"} variant="secondary">
+              <Badge className={"text-[#384B70] font-bold"} variant="secondary">
                 {singleJob?.position} Positions
               </Badge>
-              <Badge className={"text-[#F83802] font-bold"} variant="secondary">
+              <Badge className={"text-[#384B70] font-bold"} variant="secondary">
                 {singleJob?.jobType}
               </Badge>
-              <Badge className={"text-[#7209b7] font-bold"} variant="secondary">
+              <Badge className={"text-[#384B70] font-bold"} variant="secondary">
                 {singleJob?.salary} LPA
               </Badge>
             </div>
@@ -105,7 +105,7 @@ const JobDescription = () => {
             className={`rounded=lg ${
               isApplied
                 ? "bg-gray-600 cursor-not-allowed"
-                : "bg-[#7209b7] hover:bg-[#5f32ad]"
+                : "bg-[#384B70] hover:bg-[#5f32ad]"
             }`}
           >
             {isApplied ? "Already Applied" : "Apply Now"}
