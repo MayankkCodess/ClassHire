@@ -17,7 +17,7 @@ const useGetAppliedJobs = () => {
                 const res = await axios.get(`${APPLICATION_API_END_POINT}/get`, {withCredentials:true});
                 // console.log(res.data); // just for checking , is it coming 
                 if(res.data.success){
-                    dispatch(setAllAppliedJobs(res.data.application));//you can do applications in backend and then here as well 
+                    dispatch(setAllAppliedJobs(res.data.application));//you can do applications(change name) in backend and then here as well 
                 }
             } catch (error) {
                 console.log(error);

@@ -9,11 +9,14 @@ import { COMPANY_API_END_POINT } from "@/utils/constant.js";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "sonner";
 import { useSelector } from "react-redux";
+// in CompanyCreate.jsx , we are dispatching/storing singleCompany in db/redux & here using customHook for retrieve singleCompany detail using useSelector
 import useGetCompanyById from "@/hooks/useGetCompanyById.jsx";
 
 const CompanySetup = () => {
-  const params = useParams();
+  const params = useParams(); //parallely you can do const {id} = useParams();
+  //you are passing company._id to custom Hook
   useGetCompanyById(params.id);
+
   const [input, setInput] = useState({
     name: "",
     description: "",
@@ -24,12 +27,14 @@ const CompanySetup = () => {
   const { singleCompany } = useSelector((store) => store.company);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-
+  
+  //called when onChange Event triggers by any Input element 
   const changeEventHandler = (e) => {
     setInput({ ...input, [e.target.name]: e.target.value });
   };
-
+  
   const changeFileHandler = (e) => {
+    console.log(e); 
     const file = e.target.files?.[0];
     setInput({ ...input, file});//logo
   };
