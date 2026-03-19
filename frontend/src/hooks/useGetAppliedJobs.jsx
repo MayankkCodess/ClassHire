@@ -5,7 +5,7 @@ import { useEffect } from "react"
 import { useDispatch } from "react-redux"
 
 // Backend :- application.route.js , application.controller.js(getAppliedJobs) , confused with job & application model so check clearly 
-// Frontend :- Profile.jsx , check in AppliedJobTable.jsx { similar question here why used in profile }
+// Frontend :- Profile.jsx , check in AppliedJobTable.jsx { similar question here why used in profile - because we to make parent component- smart & child component - dumb  }
 //redux :- jobSlice.js , store 
 
 const useGetAppliedJobs = () => {
