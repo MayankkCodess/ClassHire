@@ -1,3 +1,96 @@
+/*
+
+First: What is this file?
+
+1. This is your global design system file (index.css)
+2. It controls: Colors  , Theme (light/dark) , Border radius , UI consistency
+
+# Basically: your entire app’s visual identity lives here
+
+# Break it down section by section
+
+1️⃣ Imports
+@import "tailwindcss";
+@import "tw-animate-css";
+
+Meaning: tailwindcss → gives utility classes (p-4, bg-red-500)
+
+tw-animate-css → adds animation utilities
+
+
+2️⃣ This line (IMPORTANT)
+@custom-variant dark (&:is(.dark *));
+
+## This defines how dark mode works
+
+Meaning: When .dark class is applied to parent → all children become dark mode
+
+Example: <html class="dark">
+
+Now your whole app switches to dark theme
+
+
+3️⃣ @theme inline (VERY IMPORTANT)
+@theme inline {
+  --color-background: var(--background);
+  --color-primary: var(--primary);
+}
+
+This maps your custom variables → Tailwind system
+
+Simple meaning: You are telling Tailwind:  “Use my variables instead of hardcoded colors”
+
+
+4️⃣ :root (LIGHT MODE)
+:root {
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+}
+ This defines default theme (light mode)
+
+Key idea: :root = global variables
+
+Applied everywhere unless overridden
+
+5️⃣ .dark (DARK MODE )
+.dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+}
+ When .dark class is added:
+
+Variables change , UI automatically updates
+
+MAGIC (IMPORTANT CONCEPT)
+
+You never change components manually.
+
+Instead: <div className="bg-background text-foreground">
+
+These are dynamic
+
+Light mode → white background
+
+Dark mode → dark background
+
+6️⃣ @layer base
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+This applies default styles globally
+
+Meaning: Every element gets consistent border style
+         Body automatically gets theme colors
+
+
+*/
+
 @import "tailwindcss";
 @import "tw-animate-css";
 

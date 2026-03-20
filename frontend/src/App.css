@@ -1,0 +1,115 @@
+/*
+
+Big Picture (How React App Runs)
+index.html → main.jsx → App.jsx → components
+
+### This is the full pipeline
+
+🔹 1️⃣ index.html (ENTRY POINT OF WEBSITE)
+
+👉 This is the first file loaded by the browser
+
+Example:
+<div id="root"></div>
+<script type="module" src="/src/main.jsx"></script>
+Role:
+
+✅ Provides root container (#root)
+✅ Loads your React app (via main.jsx)
+
+👉 Think:
+
+“HTML shell where React will be injected”
+
+🔹 2️⃣ main.jsx (BOOTSTRAP FILE)
+
+👉 This is where React starts running
+
+Example:
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App.jsx";
+
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <App />
+);
+Role:
+
+✅ Connects React with DOM
+✅ Renders <App /> inside #root
+✅ Global setup (providers, router, redux, etc.)
+
+👉 Think:
+
+“Starting engine of React”
+
+🔹 3️⃣ App.jsx (ROOT COMPONENT)
+
+👉 This is your main component
+
+Example:
+function App() {
+  return (
+    <div>
+      <Navbar />
+      <Home />
+    </div>
+  );
+}
+Role:
+
+✅ Defines app structure
+✅ Combines all components
+✅ Handles routing (usually)
+
+👉 Think:
+
+“Main layout + brain of UI”
+
+🔹 4️⃣ App.css (COMPONENT STYLING)
+
+👉 This is optional but usually used for:
+
+Global styles specific to App
+
+Custom CSS (if not using Tailwind fully)
+
+Example:
+body {
+  margin: 0;
+}
+Role:
+
+✅ Styling
+✅ Overrides
+✅ Custom design tweaks
+
+👉 But in your case (Tailwind project):
+
+👉 App.css is less important
+👉 index.css is more important (as you saw)
+
+🔥 Flow Explained Simply
+Step 1:
+
+Browser loads:
+
+index.html
+Step 2:
+
+It runs:
+
+main.jsx
+Step 3:
+
+React renders:
+
+<App />
+Step 4:
+
+App loads all components:
+
+Navbar, Home, etc.
+
+
+*/

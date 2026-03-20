@@ -1,6 +1,5 @@
 //We have imported createBrowserRouter & RouteProvider from reactRouterDom 
 import {createBrowserRouter,RouterProvider} from "react-router-dom"
-import Navbar from './components/shared/Navbar.jsx'
 import Home from './components/Home.jsx'
 import Signup from './components/auth/Signup.jsx'
 import Login from "./components/auth/Login.jsx"
@@ -16,7 +15,7 @@ import PostJob from './components/admin/PostJob.jsx'
 import Applicants from './components/admin/Applicants.jsx'
 import ProtectedRoute from './components/admin/ProtectedRoute.jsx'
 
-// this createBrowserRouter Takes arrays & Learn about a concept of {Outlet} in reactrouterDom also it helps 
+// this createBrowserRouter Takes arrays & Learn about a concept of {Outlet} also in reactrouterDom it helps in nested routing
 const appRouter = createBrowserRouter([
   {
     path:'/',
