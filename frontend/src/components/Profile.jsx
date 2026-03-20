@@ -7,7 +7,7 @@ import { Badge } from "./ui/badge.jsx";
 import { Label } from "./ui/label.jsx";
 //check AppliedJobTable.jsx also 
 import AppliedJobTable from "./AppliedJobTable.jsx";
-//check UpdateProfileDialog.jsx also 
+//check UpdateProfileDialog.jsx also (check concept- inner component ko props parent se bheja jata hai)
 import UpdateProfileDialog from "./UpdateProfileDialog.jsx";
 import { useState } from "react";
 import { useSelector } from "react-redux";
@@ -18,6 +18,7 @@ import useGetAppliedJobs from "@/hooks/useGetAppliedJobs.jsx";
 const isResume = true;
 
 const Profile = () => {
+  //it is better to call hook in parent if more that one child needs data
   useGetAppliedJobs();
   const [open, setOpen] = useState(false);
   const { user } = useSelector((store) => store.auth);
@@ -54,6 +55,7 @@ const Profile = () => {
             <h1 className="font-semibold text-xl my-3">{user?.skills}</h1>
             <div className="flex items-center gap-2">
               {user?.profile?.skills.length != 0 ? (
+                // If possible, use unique id instead of index
                 user?.profile?.skills.map((item, index) => (
                   <Badge variant="outline" key={index}>
                     {item}
@@ -70,7 +72,7 @@ const Profile = () => {
               <a
                 target="blank"
                 href={user?.profile?.resume}
-                className="text-blue-500 w-full hover:underline cursor-pointer"
+                className="text-[#384B70] w-full hover:underline cursor-pointer"
               >
                 {user?.profile?.resumeOriginalName}
               </a>

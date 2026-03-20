@@ -30,9 +30,10 @@ const CategoryCarousel = () => {
             <Carousel className="w-full max-w-xl mx-auto my-20">
                 <CarouselContent>
                     {
-                        category.map((cat, index) => (
+                        // category.map((cat, index) => (   check why do / how to optimize index here 
+                        category.map((cat) => ( 
                             <CarouselItem className="md:basis-1/2 lg-basis-1/3">
-                                <Button onClick={()=>searchJobHandler(cat)} variant="outline" className="rounded-full">{cat}</Button>
+                                <Button onClick={()=>searchJobHandler(cat)} variant="outline" className="rounded-full text-[#384B70]">{cat}</Button>
                             </CarouselItem>
                         ))
                     }
@@ -44,4 +45,4 @@ const CategoryCarousel = () => {
     )
 }
 
-export default CategoryCarousel
+export default CategoryCarousel;

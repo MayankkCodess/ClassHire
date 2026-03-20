@@ -10,10 +10,13 @@ import { useNavigate } from "react-router-dom";
 
 
 const Home = () => {
+  //because it is a parent component and can pass jobs to its child component
   useGetAllJobs();
-  //Admin Redirect to different from home page
+  //Admin Redirect to different from home page , that means agar role recrutier hai toh diff & student hai toh diff.
   const { user } = useSelector((store) => store.auth);
+
   const navigate = useNavigate();
+
   useEffect(() => {
     if (user?.role === "recruiter") {
       navigate("/admin/companies");

@@ -2,10 +2,14 @@ import React from "react";
 import { Badge } from "./ui/badge.jsx";
 import { useNavigate } from "react-router-dom";
 
+// ye jo prop aa raha hai woh LatestJobs se aa rha hai 
+
 const LatestJobCards = ({ job }) => {
+  // like ynha tumhe job description pe redirect krana hai 
   const navigate = useNavigate();
+
   return (
-    <div
+    <div //VVV.imp direct ynha job route skip krke description pr poch ja rha hai 
       onClick={() => navigate(`/description/${job._id}`)}
       className="p-5 rounded-md shadow-xl bg-white border border-gray-100 cursor-pointer"
     >
@@ -32,13 +36,13 @@ const LatestJobCards = ({ job }) => {
         <p className="text-sm text-gray-600">{job?.description}</p>
       </div>
       <div className="flex items-center gap-2 mt-4">
-        <Badge className={"text-blue-700 font-bold"} variant="ghost">
+        <Badge className={"text-[#384B70] font-bold"} variant="ghost">
           {job?.position} Positions
         </Badge>
         <Badge className={"text-[#384B70] font-bold"} variant="ghost">
           {job?.jobType}
         </Badge>
-        <Badge className={"text-[#7209b7] font-bold"} variant="ghost">
+        <Badge className={"text-[#384B70] font-bold"} variant="ghost">
           {job?.salary}LPA
         </Badge>
       </div>

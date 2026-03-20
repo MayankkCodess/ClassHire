@@ -39,12 +39,12 @@ const CompaniesTable = () => {
     <div>
       <Table>
         <TableCaption>A List of your Recently Registered Companies</TableCaption>
-        <TableHeader>
+        <TableHeader className="rounded-3xl  bg-[#384B70]">
           <TableRow>
-            <TableHead>Logo</TableHead>
-            <TableHead>Name</TableHead>
-            <TableHead>Date</TableHead>
-            <TableHead className="text-right">Action</TableHead>
+            <TableHead className="text-[#F0F2F4]">Logo</TableHead>
+            <TableHead className="text-[#F0F2F4]">Name</TableHead>
+            <TableHead className="text-[#F0F2F4]">Date</TableHead>
+            <TableHead className="text-right text-[#F0F2F4]">Action</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>

@@ -11,18 +11,24 @@ import {
   AvatarFallback,
   AvatarImage,
 } from "@/components/ui/avatar.jsx";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
-import { USER_API_END_POINT } from "../../utils/constant";
-import { setUser } from "../../redux/authSlice";
+import { USER_API_END_POINT } from "../../utils/constant.js";
+import { setUser } from "../../redux/authSlice.js";
 import { toast } from "sonner";
+
 const Navbar = () => {
-  // const user = true;
+  
+  //make open profile section for recruiter also - 
+
   const { user } = useSelector((store) => store.auth);
+
   const dispatch = useDispatch();
+
   const navigate = useNavigate();
 
+  //below is just for logout and then redirect to home page , dispatch krke redux store mai user ko null krdo , aur phir / redirect kr do
   const logoutHandler = async () => {
     try {
       const res = await axios.get(`${USER_API_END_POINT}/logout`, {
@@ -38,37 +44,88 @@ const Navbar = () => {
       toast.error(error.response.data.message);
     }
   };
+
   return (
     <div className="bg-white">
       <div className="flex items-center justify-between mx-auto max-w-7xl h-16">
         <div>
-          <h1 className="text-3xl font-bold">
+          <h1 className="text-3xl font-bold text-[#384B70]">
             <Link to="/">
-              Class<span className="text-[#6A38C2]">Hire</span>
+              Class<span className="text-[#384B70]">Hire</span>
             </Link>
           </h1>
         </div>
         <div className="flex items-center gap-5">
-          <ul className="flex font-medium items-center gap-5">
+          <ul className="flex font-medium hover:text-[#384B70] items-center gap-5">
             {user && user.role === "recruiter" ? (
               <>
                 <li>
-                  <Link to="/admin/companies">Companies</Link>
+                  <NavLink to="/admin/companies">
+                    {({ isActive }) => (
+                      <div
+                        className={
+                          isActive ? "bg-gray-200 px-3 py-1 rounded" : ""
+                        }
+                      >
+                        Companies
+                      </div>
+                    )}
+                  </NavLink>
                 </li>
                 <li>
-                  <Link to="/admin/jobs">Jobs</Link>
+                  <NavLink to="/admin/jobs">
+                    {({ isActive }) => (
+                      <div
+                        className={
+                          isActive ? "bg-gray-200 px-3 py-1 rounded" : ""
+                        }
+                      >
+                        Jobs
+                      </div>
+                    )}
+                  </NavLink>
                 </li>
               </>
             ) : (
               <>
                 <li>
-                  <Link to="/">Home</Link>
+                  <NavLink to="/">
+                    {({ isActive }) => (
+                      <div
+                        className={
+                          isActive ? "bg-gray-200 px-3 py-1 rounded" : ""
+                        }
+                      >
+                        Home
+                      </div>
+                    )}
+                  </NavLink>
                 </li>
                 <li>
-                  <Link to="/jobs">Jobs</Link>
+                  <NavLink to="/jobs">
+                    {({ isActive }) => (
+                      <div
+                        className={
+                          isActive ? "bg-gray-200 px-3 py-1 rounded" : ""
+                        }
+                      >
+                        Jobs
+                      </div>
+                    )}
+                  </NavLink>
                 </li>
                 <li>
-                  <Link to="/browse">Browse</Link>
+                  <NavLink to="/browse">
+                    {({ isActive }) => (
+                      <div
+                        className={
+                          isActive ? "bg-gray-200 px-3 py-1 rounded" : ""
+                        }
+                      >
+                        Browse
+                      </div>
+                    )}
+                  </NavLink>
                 </li>
               </>
             )}
@@ -81,7 +138,7 @@ const Navbar = () => {
                 </Button>
               </Link>
               <Link to="/signup">
-                <Button className="bg-[#6A38C2] hover:bg-[#5b30a6] cursor-pointer">
+                <Button className="bg-[#384B70] hover:bg-gray-700 cursor-pointer">
                   Sign Up
                 </Button>
               </Link>
@@ -106,7 +163,6 @@ const Navbar = () => {
                   </div>
                 </div>
                 <div className="flex flex-col my-2 text-gray-600">
-                  
                   {user && user.role === "student" && (
                     <div className="flex w-fit items-center gap-2 cursor-pointer">
                       <User2 />

@@ -5,7 +5,7 @@ import Job from "./Job.jsx";
 import { useSelector } from "react-redux";
 // import { motion } from "framer-motion";
 
-// const jobsArray = [1, 2, 3, 4, 5, 6, 7, 8];
+// const jobsArray = [1, 2, 3, 4, 5, 6, 7, 8]; F3F5F7
 
 const Jobs = () => {
   const { allJobs, searchedQuery } = useSelector((store) => store.job);
@@ -26,12 +26,12 @@ const Jobs = () => {
     }
   }, [allJobs, searchedQuery]);
 
-  return (
+  return (  
     <div>
       <Navbar />
       <div className="max-w-7xl mx-auto mt-5">
         <div className="flex gap-5">
-          <div className="w-20%">
+          <div className="w-20% border rounded-lg">
             <FilterCard />
           </div>
           {filterJobs.length <= 0 ? (
