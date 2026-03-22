@@ -8,7 +8,6 @@ import useGetAllJobs from "../hooks/useGetAllJobs.jsx";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-
 const Home = () => {
   //because it is a parent component and can pass jobs to its child component
   useGetAllJobs();

@@ -17,6 +17,7 @@ import axios from "axios";
 import { USER_API_END_POINT } from "../../utils/constant.js";
 import { setUser } from "../../redux/authSlice.js";
 import { toast } from "sonner";
+import { ModeToggle } from "../mode-toggle.jsx";
 
 const Navbar = () => {
   
@@ -142,6 +143,7 @@ const Navbar = () => {
                   Sign Up
                 </Button>
               </Link>
+              <ModeToggle/>
             </div>
           ) : (
             <Popover>
@@ -182,6 +184,7 @@ const Navbar = () => {
                       Logout
                     </Button>
                   </div>
+                
                 </div>
               </PopoverContent>
             </Popover>

@@ -15,6 +15,7 @@ import PostJob from './components/admin/PostJob.jsx'
 import Applicants from './components/admin/Applicants.jsx'
 import ProtectedRoute from './components/admin/ProtectedRoute.jsx'
 
+import { ThemeProvider } from "./components/theme-provider.jsx"
 // this createBrowserRouter Takes arrays & Learn about a concept of {Outlet} also in reactrouterDom it helps in nested routing
 const appRouter = createBrowserRouter([
   {
@@ -80,7 +81,10 @@ function App() {
       // this RouterProvider Component has one condn , ki ye prop leta hai aur bina uske kaam nahi karta 
       // aur woh prop hai knha , iss prop ko chahiye router aur uske liye ek aur import kro createBrowserRouter .. 
     }
+    <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+
       <RouterProvider router = {appRouter}/>
+    </ThemeProvider>
     </>
   )
 }
