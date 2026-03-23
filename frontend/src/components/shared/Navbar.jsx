@@ -14,14 +14,13 @@ import {
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
-import { USER_API_END_POINT } from "../../utils/constant.js";
-import { setUser } from "../../redux/authSlice.js";
+import { USER_API_END_POINT } from "@/utils/constant.js";
+import { setUser } from "@/redux/authSlice.js";
 import { toast } from "sonner";
-import { ModeToggle } from "../mode-toggle.jsx";
+import { ModeToggle } from "./mode-toggle.jsx";
 
 const Navbar = () => {
-  
-  //make open profile section for recruiter also - 
+  //make open profile section for recruiter also -
 
   const { user } = useSelector((store) => store.auth);
 
@@ -143,7 +142,7 @@ const Navbar = () => {
                   Sign Up
                 </Button>
               </Link>
-              <ModeToggle/>
+              <ModeToggle />
             </div>
           ) : (
             <Popover>
@@ -184,7 +183,6 @@ const Navbar = () => {
                       Logout
                     </Button>
                   </div>
-                
                 </div>
               </PopoverContent>
             </Popover>

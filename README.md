@@ -1,4 +1,6 @@
-Enterprise Folder Structure for (Microservies & AI Integration)
+-------------Enterprise Folder Structure for (Microservies & AI Integration)-----------
+
+Folder Structure:
 
 src/
 │
