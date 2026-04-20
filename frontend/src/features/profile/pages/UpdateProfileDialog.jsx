@@ -42,7 +42,8 @@ const UpdateProfileDialog = ({ open, setOpen }) => {
     skills: user?.profile?.skills?.map((skill) => skill),
     // file:user?.profile?.resume
     // file: null, // 👈 only for new uploads
-    file: user?.profile?.resume, // 👈 keep URL separately
+    // file: user?.profile?.resume, // 👈 keep URL separately
+        file: null,
   });
 
   const dispatch = useDispatch();

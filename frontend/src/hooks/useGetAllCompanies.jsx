@@ -14,6 +14,7 @@ const useGetAllCompanies = () => {
             try {
                 const res = await axios.get(`${COMPANY_API_END_POINT}/get`,{withCredentials:true});
                 if(res.data.success){
+                    // check setCompanies array hai isiliye controller mai .find use kiya hai findOne ki jagah 
                     dispatch(setCompanies(res.data.companies));
                 }
                 //check does frontend error comes from backend /or does here it own 

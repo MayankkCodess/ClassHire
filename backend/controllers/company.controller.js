@@ -2,19 +2,21 @@ import { Company } from "../models/company.model.js";
 import getDataUri from "../utils/datauri.js";
 import cloudinary from "../utils/cloudinary.js";
 
+// Function 1 - // CompanyCreate.jsx 
+// router.route("/register").post(isAuthenticated,registerCompany);
 export const registerCompany = async (req, res) => {
   try {
     const { companyName } = req.body;
     if (!companyName) {
       return res.status(400).json({
         message: "Company name is required",
-        success: false,
+        success:  false,
       });
-    }
+    } // check key in company model - 
     let company = await Company.findOne({ name: companyName });
     if (company) {
       return res.status(400).json({
-        message: "You can't register exist company.",
+        message: "You can't register Existed Company.",
         success: false,
       });
     }
@@ -29,14 +31,18 @@ export const registerCompany = async (req, res) => {
     });
   } catch (error) {
     console.log(error);
-     return res.status(400).json({ error })
+     return res.status(400).json({ 
+      message:"Somethings went wrong",
+      success:false
+     })
   }
 };
-
+// Function 2 - // useGetAllCompanies.jsx , Companies.jsx , companySlice.jsx 
+// router.route("/get").get(isAuthenticated,getCompany);
 export const getCompany = async (req, res) => {
   try {
     const userId = req.id; 
-    //check what .find returns in response
+    //check what .find returns in response -  it returns array 
     const companies = await Company.find({ userId });
     if (!companies) {
       return res.status(404).json({
@@ -50,11 +56,15 @@ export const getCompany = async (req, res) => {
     });
   } catch (error) {
     console.log(error);
+    return res.status(400).json({
+      message:"No Companies Found",
+      success:false
+    })
   }
 };
 
-//hook - useGetCompanyById.jsx
-
+// router.route("/get/:id").get(isAuthenticated,getCompanyById);
+//hook - useGetCompanyById.jsx , CompanySetup.jsx
 export const getCompanyById = async (req, res) => {
   try {
     const companyId = req.params.id;
@@ -71,9 +81,14 @@ export const getCompanyById = async (req, res) => {
     });
   } catch (error) {
     console.log(error);
+    return res.status(400).json({
+      message:"No Company Found",
+      success:false
+    })
   }
 };
-
+// hook - useGetCompanyById.jsx , CompanySetup.jsx
+// router.route("/update/:id").put(isAuthenticated , singleUpload,updateCompany);
 export const updateCompany = async (req, res) => {
   try {
     const { name, description, website, location } = req.body;
@@ -95,7 +110,7 @@ export const updateCompany = async (req, res) => {
       });
     }
     return res.status(200).json({
-      message: "Company information updated.",
+      message: "Company Information Updated.",
       success: true,
     });
   } catch (error) {

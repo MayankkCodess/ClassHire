@@ -7,6 +7,7 @@ import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setAllApplicants } from "@/redux/applicationSlice.js";
 import { toast } from "sonner";
+import { Users } from "lucide-react";
 
 const Applicants = () => {
   const params = useParams();

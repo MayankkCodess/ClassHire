@@ -15,13 +15,15 @@ import { useSelector } from "react-redux";
 import useGetAppliedJobs from "@/hooks/useGetAppliedJobs.jsx";
 
 // const skills = ["HTML", "CSS", "JavaScript", "Reactjs"];
-const isResume = true;
+// const isResume = true;
+
 
 const Profile = () => {
   //it is better to call hook in parent if more that one child needs data
   useGetAppliedJobs();
   const [open, setOpen] = useState(false);
   const { user } = useSelector((store) => store.auth);
+  const isResume = !!user?.profile?.resume;
   return (
     <div>
       <Navbar />
@@ -70,7 +72,7 @@ const Profile = () => {
             <Label className="text-md font-bold">Resume</Label>
             {isResume ? (
               <a
-                target="blank"
+                target="_blank" rel="noreferrer"// check its benefits 
                 href={user?.profile?.resume}
                 className="text-[#384B70] w-full hover:underline cursor-pointer"
               >

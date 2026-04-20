@@ -5,7 +5,7 @@ export const postJob = async(req,res)=>{
     try {
         const{title,description,salary,requirements,location,experience,jobType,position,companyId} = req.body;
         const userId = req.id;
-        console.log(req.body)
+        // console.log(req.body)
         if(!title || !description || !salary || !requirements || !experience || !location || !jobType || !position || !companyId){
             return res.status(400).json({
                 message:"Something is missing.",
@@ -15,7 +15,7 @@ export const postJob = async(req,res)=>{
         const job = await Job.create({
             title,
             description,
-            requirements:requirements.split(","),
+            requirements:requirements.split(","),//array hai
             salary:Number(salary),
             location,
             jobType,
@@ -31,13 +31,30 @@ export const postJob = async(req,res)=>{
         })
     } catch (error) {
         console.log(error);
-        return res.status(400).json({ message: "Failed to creating a new job." })
+        return res.status(400).json({
+            message: "Failed to Creating a new Job." ,
+            success:false
+        })
     }
 }
   // Students k Liye ,, check this full fn clearly 
+// The controller starts by looking for a query parameter named keyword in the request URL (e.g., /api/jobs?keyword=developer).
+// If a keyword is provided, it stores it in the keyword variable.
+// If the user doesn't provide a keyword, it defaults to an empty string (""), which essentially means "search for everything."
+
 export const getAllJobs = async (req,res) =>{
     try {
         const keyword = req.query.keyword || "";
+// This builds a MongoDB query object using specific operators:
+
+// $or: This operator tells the database to return a document if it matches any of the conditions in the array.
+
+// $regex: This performs a regular expression search, meaning it looks for the keyword as a substring. (e.g., searching "dev" will match "developer").
+
+// $options: "i": This makes the search case-insensitive, so "Developer", "DEVELOPER", and "developer" will all trigger a match.
+
+// Result: The query looks for the keyword in either the job's title OR its description. If the keyword is an empty string, this query will simply match every job in the database.
+//        
         const query = {
             $or: [
                 {title:{$regex:keyword,$options:"i"}},
@@ -59,7 +76,10 @@ export const getAllJobs = async (req,res) =>{
         })
     } catch (error) {
         console.log(error);
-         return res.status(400).json({ message: "Failed to get jobs" });
+         return res.status(400).json({ 
+            message: "Failed to get Jobs" ,
+            success:false
+        });
     }
 }
 
@@ -82,7 +102,10 @@ export const getJobById = async(req,res)=>{
         });
     }catch(error){
         console.log(error);
-        return res.status(400).json({message:"Failed to get job"});
+        return res.status(400).json({
+            message:"Failed to get job",
+            success:false
+        });
     }
 }
 

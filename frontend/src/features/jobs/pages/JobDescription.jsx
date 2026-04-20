@@ -10,7 +10,7 @@ import {
 } from "../../../utils/constant.js";
 import { setSingleJob } from "../../../redux/jobSlice.js";
 //useSelector:- this hook allow you to extract data or the state from the redux from the redux store using selector function(returns the data)
-//so jo bhi data tumhe store se chahiye ye return krdeta hai, for that you have already used provider in main.jsx
+//so jo bhi data tumhe store se chahiye ye return krdeta hai, for that you have already used provider in main.jsx (benefit sabhi components ko data ka access ho jata hai)
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "sonner";
 

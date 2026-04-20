@@ -123,7 +123,8 @@ export const updateProfile = async (req,res) => {
         const fileUri = getDataUri(file);
         const cloudResponse = await cloudinary.uploader.upload(fileUri.content, {
         resource_type: "auto",
-         type: "upload"  
+         type: "upload" ,
+          access_mode: "public"  // ✅ add this 
       });
 
          if (!fullname || !email || !phoneNumber || !bio || !skills) {
