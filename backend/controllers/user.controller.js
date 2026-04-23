@@ -4,6 +4,9 @@ import jwt from "jsonwebtoken"
 import getDataUri from "../utils/datauri.js";
 import cloudinary from "../utils/cloudinary.js";
 
+// status codes - 400 - bad request (invalid data) , 401 - unauthorized , 403 - forbidden (access denied ) , 404 - not found ( like db query ) , 409 - duplicate data like email already registered , 422 - validation error 
+// success codes - 200 - ok , 201 - created , 204 - no data returned (no content)
+
 export const register = async(req,res) =>{
     try{
         // console.log("BODY RECEIVED:", req.body);

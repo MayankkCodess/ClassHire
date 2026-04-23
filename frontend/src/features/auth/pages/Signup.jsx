@@ -61,9 +61,11 @@ const Signup = () => {
     try {
       dispatch(setLoading(true));
       const res = await axios.post(`${USER_API_END_POINT}/register`, formData, {
+//         Steps: // Open your app // Right click → Inspect // Go to Network tab // Submit your form // Click the request (/register)
         headers: {
           "Content-Type": "multipart/form-data",
         },
+        // withCredentials mean - “If cookies exist, include them in request” , in first request/signup it does not happen , means no cookies send
         withCredentials: true,
       });
       if (res.data.success) {
